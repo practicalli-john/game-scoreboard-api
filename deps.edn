@@ -1,0 +1,44 @@
+{:paths
+ ["src" "resources"]
+
+ :deps
+ {org.clojure/clojure {:mvn/version "1.10.3"}
+
+  ;; Web Services libraries
+  metosin/reitit           {:mvn/version "0.5.15"}
+  ring/ring-jetty-adapter  {:mvn/version "1.9.3"}
+
+  ;; System / Support libraries
+  com.brunobonacci/mulog {:mvn/version "0.8.1"}
+  }
+
+ :aliases
+ {
+  :alpha/hotload-libs
+  {:extra-deps {org.clojure/tools.deps.alpha
+                {:git/url "https://github.com/clojure/tools.deps.alpha"
+                 :sha     "d77476f3d5f624249462e275ae62d26da89f320b"}}}
+
+  :run-m
+  {:main-opts ["-m" "practicalli.game-scoreboard"]}
+
+  :run-x {:ns-default practicalli.game-scoreboard
+          :exec-fn greet
+          :exec-args {:name "Clojure"}}
+
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}}}
+
+  :runner
+  {:extra-deps {io.github.cognitect-labs/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "2d69f33d7980c3353b246c28f72ffeafbd9f2fab"}}
+   :exec-fn cognitect.test-runner.api/test}
+
+
+  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.0.216"}}
+            :exec-fn hf.depstar/uberjar
+            :exec-args {:aot true
+                        :jar "practicalli.game-scoreboard.jar"
+                        :main-class "practicalli.game-scoreboard"
+                        :sync-pom true}}}}
