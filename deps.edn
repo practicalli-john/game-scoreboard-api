@@ -10,6 +10,7 @@
 
   ;; System / Support libraries
   com.brunobonacci/mulog {:mvn/version "0.8.1"}
+  org.slf4j/slf4j-nop    {:mvn/version "1.7.32"}
   }
 
  :aliases
